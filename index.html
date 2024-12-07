@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body style="margin: 0;">
+<!-- created by Creativewiz 🍁  -->
+ <canvas id="canv"></canvas>
+ 
+ <script>
+  let c = document.getElementById('canv');
+  let ctx = c.getContext('2d');
+  c.width = w = window.innerWidth;
+  c.height = h = window.innerHeight;
+  
+  let t = 0, num = 550, b,
+  x, y, x1, y1,
+  t1 = 1 / 60;
+  
+  var anim = function(){
+  	ctx.globalCompositeOperation = 'source-over';
+  		let hue = performance.now() * 0.1 % 360;
+  	ctx.fillStyle = '#223';
+  	ctx.fillRect(0, 0, w, h);
+  	ctx.globalCompositeOperation = 'lighter';
+  	for (let i = 0; i < 1; i++){
+  		x = 0;
+  		ctx.beginPath();
+  		for (let j = 0; j < num; j++){
+  			x -= 0.33 * Math.sin(7);
+  			y = x * Math.sin(i+3.0 *t+x/20.9)/0.88;
+  			x1 = x*Math.cos(b) - y*Math.sin(b);
+  			y1 = x*Math.sin(b) + y*Math.cos(b);
+  			b = (j*3) *Math.PI / 4;
+  			ctx.lineWidth = 0.175;
+  			ctx.lineTo(w/2 - x1, h/2 - y1);
+  		}
+  	
+  		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  		ctx.stroke();
+  	}
+  	t += t1;
+  	window.requestAnimationFrame(anim);
+  }
+ 	requestAnimationFrame(anim);
+ 	window.addEventListener('resize', function(){
+ 		c.width = w = window.innerWidth;
+ 		c.height = h = window.innerHeight;
+ 	}, false);
+ </script>
+
+
+   
+</body>
+</html>	
